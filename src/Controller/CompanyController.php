@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Company;
+use App\Entity\Contact;
 use App\Form\Company1Type;
 use App\Repository\CompanyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,8 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
- * @Route("/company")
+ * @Route("/entreprise")
  */
 class CompanyController extends AbstractController
 {
@@ -51,7 +53,8 @@ class CompanyController extends AbstractController
      */
     public function show(Company $company): Response
     {
-        return $this->render('company/show.html.twig', ['company' => $company]);
+        return $this->render('company/show.html.twig',
+            ['company' => $company]);
     }
 
     /**
@@ -87,4 +90,8 @@ class CompanyController extends AbstractController
 
         return $this->redirectToRoute('company_index');
     }
+
+
+
+
 }

@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
@@ -20,27 +22,32 @@ class Contact
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex(pattern="/^[a-zA-Z\-]+$/", match=true, message="Le champs ne prend que des lettres ou tiret")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex(pattern="/^[a-zA-Z\-]+$/", match=true, message="Le champs ne prend que des lettres ou tiret")
      */
     private $firstName;
 
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Regex(pattern="/^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$/", match=true, message="Le format attendu est 00 00 00 00 00")
      */
     private $mobilPhone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Regex(pattern="/^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$/", match=true, message="Le format attendu est 00 00 00 00 00")
      */
     private $officePhone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Regex(pattern="/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/", match=true, message="le format n'est pas conforme")
      */
     private $email;
 
@@ -50,19 +57,22 @@ class Contact
      */
     private $company;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="contacts")
-     */
-    private $role;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Civility", inversedBy="contacts")
      */
     private $civility;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="contacts")
+     */
+    private $roles;
+
     public function __construct()
     {
-        $this->role = new ArrayCollection();
+
+        $this->roles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -143,18 +153,12 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return Collection|Role[]
-     */
-    public function getRole(): Collection
-    {
-        return $this->role;
-    }
+
 
     public function addRole(Role $role): self
     {
-        if (!$this->role->contains($role)) {
-            $this->role[] = $role;
+        if (!$this->roles->contains($role)) {
+            $this->roles[] = $role;
         }
 
         return $this;
@@ -162,8 +166,8 @@ class Contact
 
     public function removeRole(Role $role): self
     {
-        if ($this->role->contains($role)) {
-            $this->role->removeElement($role);
+        if ($this->roles->contains($role)) {
+            $this->roles->removeElement($role);
         }
 
         return $this;
@@ -184,5 +188,19 @@ class Contact
 
     public function __toString() {
         return $this->name;
+    }
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getRoles(): Collection
+    {
+        return $this->roles;
+    }
+    public function setRoles(?Roles $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 }

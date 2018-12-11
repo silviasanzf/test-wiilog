@@ -3,9 +3,75 @@
 {% block title %}New Company{% endblock %}
 
 {% block body %}
-    <h1>Create new Company</h1>
+    <div class="container general">
+        <h1>Référencer une nouvelle entreprise</h1>
 
-    {{ include('company/_form.html.twig') }}
+        {{ form_start(form) }}
 
-    <a href="{{ path('company_index') }}">back to list</a>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.name, {'label': 'Nom de l\'entreprise'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.address1, {'label': 'Adresse 1'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.address2, {'label': 'Adresse 2'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.address3, {'label': 'Adresse 3'}) }}
+            </div>
+        </div>
+
+        <div class="row justify-content">
+            <div class="col-6 space-around">
+                {{ form_row(form.codePost, {'label': 'Code Postal'}) }}
+            </div>
+            <div class="col-6 space-around">
+                {{ form_row(form.city, {'label': 'Ville'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.siret, {'label': 'Numéro SIRET'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.phone, {'label': 'Numéro Tel.'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.email, {'label': 'Adresse email'}) }}
+            </div>
+        </div>
+
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.french, {'label': 'L\'entreprise est-elle française? (cocher pour "oui")'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.type, {'label': 'S\'agit-il d\'un: '}) }}
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col space-around">
+                <button class="btn btn-primary btn-block">{{ button_label|default('Enregistrer l\'entreprise') }}</button>
+            </div>
+        </div>
+
+    {{ form_end(form) }}
+
+    <a href="{{ path('company_index') }}">Retour à la liste</a>
+    </div>
 {% endblock %}

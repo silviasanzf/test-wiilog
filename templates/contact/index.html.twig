@@ -1,37 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact and company index{% endblock %}
+{% block title %}Contact index{% endblock %}
 
 {% block body %}
-
-    <h1>Contact index</h1>
+<div class="container general">
+    <h1>Index des contacts</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Civility</th>
-                <th>Name</th>
-                <th>FirstName</th>
-                <th>MobilPhone</th>
-                <th>OfficePhone</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Company name</th>
-                <th>Company address1</th>
-                <th>Company address2</th>
-                <th>Company address3</th>
-                <th>Company code Post</th>
-                <th>Company city</th>
-                <th>Company siret</th>
-                <th>Company phone</th>
-                <th>Company email</th>
-                <th>Company french</th>
-                <th>Company Type</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>M. Mme</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>N° de téléphone portable</th>
+            <th>N° de téléphone bureau</th>
+            <th>Adresse Email</th>
+
+            <th>Fonction(s)</th>
+            <th>Entreprise</th>
+            <th>actions</th>
+
+        </tr>
         </thead>
         <tbody>
+
         {% for contact in contacts %}
             <tr>
                 <td>{{ contact.id }}</td>
@@ -42,22 +35,14 @@
                 <td>{{ contact.officePhone }}</td>
                 <td>{{ contact.email }}</td>
 
+                <td>{% for role in contact.roles %} {{ role.type }}{% endfor %}</td>
                 <td>{{ contact.company.name }}</td>
-                <td>{{ contact.company.address1 }}</td>
-                <td>{{ contact.company.address2 }}</td>
-                <td>{{ contact.company.address3 }}</td>
-                <td>{{ contact.company.codePost }}</td>
-                <td>{{ contact.company.city }}</td>
-                <td>{{ contact.company.siret }}</td>
-                <td>{{ contact.company.phone }}</td>
-                <td>{{ contact.company.email }}</td>
-                <td>{{ contact.company.french }}</td>
-                <td>{{ contact.company.type }}</td>
                 <td>
-                    <a href="{{ path('contact_show', {'id': contact.id}) }}">show</a>
-                    <a href="{{ path('contact_edit', {'id': contact.id}) }}">edit</a>
+                    <a href="{{ path('contact_show', {'id': contact.id}) }}">consulter</a>
+                    <a href="{{ path('contact_edit', {'id': contact.id}) }}">modifier/supprimer</a>
                 </td>
             </tr>
+
         {% else %}
             <tr>
                 <td colspan="7">no records found</td>
@@ -65,7 +50,14 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="row justify-content">
+        <div class="col-4 space-around">
+            <a href="{{ path('contact_new') }}">Créer un nouveau contact</a>
+        </div>
+        <div class="col-4 space-around">
+            <a href="{{ path('company_new') }}">Créer une nouvelle entreprise</a>
+        </div>
+    </div>
 
-    <a href="{{ path('contact_new') }}">Create new contact</a>
-    <a href="{{ path('company_new') }}">Create new company</a>
-{% endblock %}
+
+    {% endblock %}

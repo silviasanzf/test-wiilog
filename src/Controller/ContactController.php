@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Entity\Role;
 use App\Form\Contact1Type;
+use App\Service\majuscule;
 use App\Repository\ContactRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,13 +30,19 @@ class ContactController extends AbstractController
     /**
      * @Route("/new", name="contact_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Majuscule $majuscule): Response
     {
         $contact = new Contact();
         $form = $this->createForm(Contact1Type::class, $contact);
         $form->handleRequest($request);
 
+
+        $nameM = $majuscule->generate($contact->getName());
+        $contact->setName($nameM);
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($contact);
             $em->flush();
@@ -52,12 +59,9 @@ class ContactController extends AbstractController
     /**
      * @Route("/{id}", name="contact_show", methods="GET")
      */
-    public function show(Contact $contact, Role $role, Role $roles): Response
+    public function show(Contact $contact): Response
     {
-        return $this->render('contact/show.html.twig', [
-            'contact' => $contact,
-            'role' => $role,
-            'roles' =>$roles]);
+        return $this->render('contact/show.html.twig', ['contact' => $contact]);
     }
 
     /**

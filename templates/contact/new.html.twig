@@ -3,9 +3,55 @@
 {% block title %}New Contact{% endblock %}
 
 {% block body %}
-    <h1>Create new Contact</h1>
-
-    {{ include('contact/_form.html.twig') }}
-
-    <a href="{{ path('contact_index') }}">back to list</a>
+    <div class="container general">
+        <h1>Créer un nouveau contact</h1>
+        {{ form_start(form) }}
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.civility, {'label': 'Monsieur ou Madame '}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.name, {'label': 'Nom'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.firstName, {'label': 'Prénom'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.mobilPhone, {'label': 'Numéro de portable'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.officePhone, {'label': 'Numéro de téléphone du bureau'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.email, {'label': 'Adresse email'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.roles, {'label': 'Fonction(s) dans l\'entreprise'}) }}
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col space-around">
+                {{ form_row(form.company, {'label': 'Entreprise'}) }}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col space-around">
+                <button class="btn btn-primary btn-block">{{ button_label|default('Enregistrer le contact') }}</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+        <a href="{{ path('contact_index') }}">retour à la liste</a>
+    </div>
 {% endblock %}

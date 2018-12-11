@@ -1,68 +1,81 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Company{% endblock %}
+{% block title %}Entreprise{% endblock %}
 
 {% block body %}
-    <h1>Company</h1>
 
+<div class="container general">
+    <h1>Entreprise consultée</h1>
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ company.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ company.name }}</td>
-            </tr>
-            <tr>
-                <th>Address1</th>
-                <td>{{ company.address1 }}</td>
-            </tr>
-            <tr>
-                <th>Address2</th>
-                <td>{{ company.address2 }}</td>
-            </tr>
-            <tr>
-                <th>Address3</th>
-                <td>{{ company.address3 }}</td>
-            </tr>
-            <tr>
-                <th>CodePost</th>
-                <td>{{ company.codePost }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ company.city }}</td>
-            </tr>
-            <tr>
-                <th>Siret</th>
-                <td>{{ company.siret }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ company.phone }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ company.email }}</td>
-            </tr>
-            <tr>
-                <th>French</th>
-                <td>{{ company.french ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ company.type }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ company.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ company.name }}</td>
+        </tr>
+        <tr>
+            <th>Adresse 1</th>
+            <td>{{ company.address1 }}</td>
+        </tr>
+        <tr>
+            <th>Adresse 2</th>
+            <td>{{ company.address2 }}</td>
+        </tr>
+        <tr>
+            <th>Adresse 3</th>
+            <td>{{ company.address3 }}</td>
+        </tr>
+        <tr>
+            <th>Code Postal</th>
+            <td>{{ company.codePost }}</td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td>{{ company.city }}</td>
+        </tr>
+        <tr>
+            <th>n° Siret</th>
+            <td>{{ company.siret }}</td>
+        </tr>
+        <tr>
+            <th>Télephone</th>
+            <td>{{ company.phone }}</td>
+        </tr>
+        <tr>
+            <th>Adresse Email</th>
+            <td>{{ company.email }}</td>
+        </tr>
+        <tr>
+            <th>Français</th>
+            <td>{{ company.french ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ company.type }}</td>
+        </tr>
 
+        <th>Contacts associés</th>
+        <td>{% for contact in company.contact %}{{ contact.Name }}{{ " " }}{{ contact.firstName }}{{ " " }}{{ contact.email }}{{ " " }}{{ contact.mobilPhone }}</br>
+        {% endfor %}</td>
+        </tr>
 
         </tbody>
     </table>
 
-    <a href="{{ path('company_index') }}">back to list</a>
+    <div class="row justify-content-center">
+        <div class="col-4 space-around">
+            <a href="{{ path('company_index') }}"> Retour à la liste d'entreprise</a>
+        </div>
+        <div class="col-4 space-around">
+            <a href="{{ path('company_edit', {'id': company.id}) }}">Mettre à jour - supprimer</a>
+        </div>
+        <div class="col-4 space-around">
+            <a href="{{ path('contact_new') }}">Créer un nouveau contact</a>
+        </div>
+    </div>
 
-    <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
 
-    {{ include('company/_delete_form.html.twig') }}
-{% endblock %}
+    {% endblock %}

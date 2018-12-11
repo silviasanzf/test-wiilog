@@ -24,13 +24,16 @@ class Role
     private $type;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Contact", mappedBy="role")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Contact", mappedBy="roles")
      */
     private $contacts;
+
+
 
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -80,4 +83,6 @@ class Role
     public function __toString() {
         return $this->type;
     }
+
+
 }

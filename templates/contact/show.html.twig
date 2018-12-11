@@ -3,53 +3,57 @@
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-    <h1>Contact</h1>
+    <div class="container general">
+        <h1>Contact consulté</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="table">
+            <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ contact.id }}</td>
             </tr>
             <tr>
-                <th>Genre</th>
+                <th>Civilité</th>
                 <td>{{ contact.civility }}</td>
             </tr>
             <tr>
-                <th>Name</th>
-                <td>{{ contact.name }}</td>
+                <th>Nom</th>
+                <td>{{ contact.name}}</td>
             </tr>
             <tr>
-                <th>FirstName</th>
+                <th>Prénom</th>
                 <td>{{ contact.firstName }}</td>
             </tr>
             <tr>
-                <th>MobilPhone</th>
+                <th>N° Téléphone portable</th>
                 <td>{{ contact.mobilPhone }}</td>
             </tr>
             <tr>
-                <th>OfficePhone</th>
+                <th>N° téléphone bureau</th>
                 <td>{{ contact.officePhone }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>Adresse email</th>
                 <td>{{ contact.email }}</td>
             </tr>
             <tr>
-                <th>Fonction(s)</th>
+                <th>Entreprise</th>
+                <td>{{ contact.company.name }}</td>
+            </tr>
 
-                <td>{{ role.type }}</td>
+            <tr>
+                <th>Fonction(s)</th>
+                <td>{%  for role in contact.roles%} {{ role.type }}{% endfor %}</td>
 
             </tr>
 
 
+            </tbody>
+        </table>
 
-        </tbody>
-    </table>
+        <a href="{{ path('contact_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('contact_index') }}">back to list</a>
+        <a href="{{ path('contact_edit', {'id': contact.id}) }}">Mettre à jour - supprimer</a>
+    </div>
 
-    <a href="{{ path('contact_edit', {'id': contact.id}) }}">edit</a>
-
-    {{ include('contact/_delete_form.html.twig') }}
 {% endblock %}

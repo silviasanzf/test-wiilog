@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Bienvenue{% endblock %}
+
+{% block body %}
+
+    <div class="container general">
+        <h1>Bienvenue sur page de l'exercice:</h1>
+        <h1>créer un gestionnaire de contacts d'entreprise</h1>
+        <p>Cet exercice a été réalisé dans le cadre d'un test préalable à un stage pour l'entreprise WIILOG</p>
+
+        <div class="jumbotron">
+            <h2 class="display-4">CONSIGNES:</h2>
+            <p class="lead">L'interface doit pouvoir permettre : </p>
+            <strong><p>La gestion des données entreprises :</strong>
+
+                Créer/Modifier/supprimer des entreprises</p>
+                <strong><p> La gestion des contacts :</strong>
+                Créer/Modifier/supprimer des contacts</p>
+            <strong><p>Règles de gestion :</strong>
+            <p>Un entreprise peut avoir 1 ou plusieurs contacts.</p>
+            <p>Un contact ne peut avoir qu’une seule entreprise.</p>
+            <p>Il doit être possible d'afficher sur la même page web les informations de l’entreprise et les contacts
+                associés</p>
+            <p>Interface html/css libre</p>
+
+        </div>
+
+        <div class="row justify-content">
+            <div class="col-lg-6 col-12 space-around">
+                <div class="jumbotron">
+                    <strong><p>Données entreprises :</strong>
+                    <p>Nom société (texte - Obligatoire)</p>
+                    <p>Adresse 1 (texte) Adresse 2 (texte) Adresse 3 (texte) </p>
+                    <p>Code postal (texte) Ville (texte) </p>
+                    <p>Siret (texte)</p>
+                    <p>Téléphone (texte)</p>
+                    <p>Email (texte)</p>
+                    <p>Type : (liste à sélection unique)
+                        Prospect
+                        Client</p>
+                    Français : Oui/Non</p>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6 col-12">
+                <div class="jumbotron">
+                    <strong><p>Données Contact :</strong>
+                    <p>Nom (texte - Obligatoire) Prénom (texte - Obligatoire)</p>
+                    <p>Civilité (Sélection unique) M. Mme.</p>
+                    <p>Fonction (liste à plusieurs sélections) : Fonctionnel / Opérationnel / Dirigeant</p>
+                    <p>Téléphone portable (texte) / Téléphone bureau (texte)</p>
+                    <p>Email (texte)</p>
+
+                </div>
+            </div>
+        </div>
+        <h2>Sur Symfony4.2</h2>
+        <p> Réalisé avec <i class="fas fa-heart"></i> par Silvia SANZ en formation à la Wild Code School depuis septembre 2018</p>
+
+    </div>
+{% endblock %}

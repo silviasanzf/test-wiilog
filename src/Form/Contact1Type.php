@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Contact;
+use App\Entity\Role;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,8 +21,14 @@ class Contact1Type extends AbstractType
             ->add('officePhone')
             ->add('email')
             ->add('company')
-            ->add('role')
-
+            ->add(
+                'roles',
+            EntityType::class,
+                [
+                    'class' => Role::class,
+                    'multiple' => true,
+                    'expanded' => true
+                ])
         ;
     }
 
@@ -30,4 +38,5 @@ class Contact1Type extends AbstractType
             'data_class' => Contact::class,
         ]);
     }
+
 }
